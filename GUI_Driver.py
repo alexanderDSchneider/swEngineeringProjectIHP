@@ -2,7 +2,10 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from Algorithm import Algorithm
+from login_script import *
 import random
+import tkinter
+
 
 
 class GUI_Driver(tk.Tk):     #inherit from Tkinter
@@ -20,13 +23,13 @@ class GUI_Driver(tk.Tk):     #inherit from Tkinter
         # this will allow us to create different windows
         self.frames = {}
         
-        for F in (Tutorial, StartScreen, Algorithm_Visualizer):
+        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer):
             # screen on start
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row = 0, column = 0, sticky = "nsew")
         
-        self.show_frame(StartScreen)
+        self.show_frame(Login)
         
         
     def show_frame(self, cont):
@@ -34,7 +37,59 @@ class GUI_Driver(tk.Tk):     #inherit from Tkinter
         frame.tkraise()
         
         
-# this is a new page        
+# this is a new page
+class Login(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+          
+        #create login frame
+        login_frame = tk.Frame(self, width=200, height=100)
+        login_frame.pack()
+
+        label = tk.Label(self, text = "Enter your user information", font = LARGE_FONT)
+        label.pack(pady = 10, padx = 10)
+
+        #username box        
+        user_box = tk.Entry(login_frame)
+        user_box.pack()
+        
+        
+            
+        #password box
+        pass_box = tk.Entry(login_frame)
+        pass_box.pack()
+            
+
+
+        #on    
+        login = tk.Button(self, text = "Login", command = lambda: on_login_press())
+        login.pack()
+        
+
+        #pass username and password to login funcion
+            
+
+        
+        createAccount = tk.Button(self, text = "Create Account", )
+        createAccount.pack()
+
+        def on_login_press():
+            #call function to login
+            check = login_press(user_box.get(), pass_box.get())
+            print(check)
+            if(check == 1):
+                #successfull login
+                controller.show_frame(StartScreen)
+                print("ee")
+            else:
+                user_box.delete(0,"end")
+                pass_box.delete(0,"end")
+            
+            
+            
+
+
 class StartScreen(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
