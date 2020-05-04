@@ -4,10 +4,10 @@ import hashlib
 import pymysql.cursors
 
 
-def send_to_db():
+def send_to_db(e, u):
 
-    new_user = input('Enter a user name: ')
-    new_pass = input('Enter a password:')
+    new_user = e
+    new_pass = u
     salt = uuid.uuid4()
     salt = str(salt)
     to_encode = new_pass + salt
@@ -32,10 +32,12 @@ def send_to_db():
 
             # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default. Must commit.
             connection.commit()
+            
     finally:
-        print('Test your account credentials')
-        login()
         connection.close()
+        return 1
+        print(new_user)
+        print(new_pass)
 
 
 def user_login(user, password):
@@ -81,31 +83,17 @@ def user_login(user, password):
     finally:
         connection.close()
 
-def print_menu():
-    menu_select = 0
-
-    print('Enter 1: To create a new account.')
-    print('Enter 2: To login to an existing account.')
-    print('Enter 3: to exit')
-    menu_select = int(input('Enter Selection: '))
-    if menu_select == 1:
-        send_to_db()
-    if menu_select == 2:
-        login()
-    if menu_select == 3:
-        menu_select = 3
-
 
 def login_press(e, u):
-    print(e)
-    print(u)
     return_code = user_login(e, u)
-    print(return_code)
     return return_code
 
-def main():
-    print_menu()
+def create_press(e, u):
+    return_code = send_to_db(e, u)
+    return return_code    
+#def main():
+    #print_menu()
 
 
-if __name__ == '__main__':  # for import
-    main()
+#if __name__ == '__main__':  # for import
+    #main()

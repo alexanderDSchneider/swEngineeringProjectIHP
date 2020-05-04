@@ -23,7 +23,7 @@ class GUI_Driver(tk.Tk):     #inherit from Tkinter
         # this will allow us to create different windows
         self.frames = {}
         
-        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer):
+        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer, CreateAccount):
             # screen on start
             frame = F(container, self)
             self.frames[F] = frame
@@ -53,40 +53,69 @@ class Login(tk.Frame):
         #username box        
         user_box = tk.Entry(login_frame)
         user_box.pack()
-        
-        
-            
+                   
         #password box
         pass_box = tk.Entry(login_frame)
         pass_box.pack()
             
-
-
-        #on    
+        #on keypress call login function   
         login = tk.Button(self, text = "Login", command = lambda: on_login_press())
         login.pack()
-        
-
-        #pass username and password to login funcion
-            
-
-        
-        createAccount = tk.Button(self, text = "Create Account", )
+                     
+        createAccount = tk.Button(self, text = "Create Account", command = lambda: controller.show_frame(CreateAccount) )
         createAccount.pack()
 
         def on_login_press():
-            #call function to login
+            #call function to login, returns one if correct
+            #pass username and password to login funcion
             check = login_press(user_box.get(), pass_box.get())
             print(check)
             if(check == 1):
                 #successfull login
                 controller.show_frame(StartScreen)
-                print("ee")
             else:
+                #on fail clear boxes to try again
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
+
+
+
+class CreateAccount(tk.Frame):               
             
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+          
+        #create frame
+        create_account_frame = tk.Frame(self, width=200, height=100)
+        create_account_frame.pack()
+
+        label = tk.Label(self, text = "Create your username and password", font = LARGE_FONT)
+        label.pack(pady = 10, padx = 10)
+
+        #username box        
+        user_box = tk.Entry(create_account_frame)
+        user_box.pack()
+                  
+        #password box
+        pass_box = tk.Entry(create_account_frame)
+        pass_box.pack()
             
+        #on keypress    
+        create = tk.Button(self, text = "Create", command = lambda: on_create_press())
+        create.pack()
+
+        def on_create_press():
+            #call function to create account
+            check = create_press(user_box.get(), pass_box.get())
+            print(check)
+            if(check == 1):
+                #successfull 
+                controller.show_frame(Login)
+            else:
+                #if fails clears box to try again
+                user_box.delete(0,"end")
+                pass_box.delete(0,"end")
+                    
             
 
 
