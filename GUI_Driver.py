@@ -88,7 +88,6 @@ class Login(tk.Frame):
             label.pack(side="top", fill="x", pady=10)
             B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
             B1.pack()
-            #popup.mainloop()
                 
 
 
@@ -126,8 +125,18 @@ class CreateAccount(tk.Frame):
                 controller.show_frame(Login)
             else:
                 #if fails clears box to try again
+                popupmsg("Username already exists, or something else, whatever")
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
+
+
+        def popupmsg(msg):
+            popup = tk.Tk()
+            popup.wm_title("!")
+            label = ttk.Label(popup, text=msg)
+            label.pack(side="top", fill="x", pady=10)
+            B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
+            B1.pack()       
                     
             
 

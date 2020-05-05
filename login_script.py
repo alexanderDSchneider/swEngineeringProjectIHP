@@ -13,7 +13,6 @@ def send_to_db(e, u):
     salt = str(salt)
     to_encode = new_pass + salt
     user_hash = hashlib.sha256(to_encode.encode())
-    print(user_hash)
 
     connection = pymysql.connect(host='mrbartucz.com',
                                  user='eb1391ck',
@@ -24,21 +23,36 @@ def send_to_db(e, u):
 
     try:
         with connection.cursor() as cursor:
-            # Select all Students
-            sql = "INSERT INTO user_data(user_name, salt, hash) VALUES (%s, %s, %s) "
-            to_sql = (new_user, salt, user_hash.hexdigest())
 
-            # execute the SQL command
+            #find if the username is already taken
+            sql = "SELECT * FROM user_data WHERE user_name = %s"
+            to_sql = new_user
+            print(new_user)
+
             cursor.execute(sql, to_sql)
+                
+            for row in cursor:
+                fetched_user = row['user_name']
 
-            # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default. Must commit.
-            connection.commit()
+            print(fetched_user)    
+
+            if(new_user != fetched_user):
+                          
+                sql = "INSERT INTO user_data(user_name, salt, hash) VALUES (%s, %s, %s) "
+                to_sql = (new_user, salt, user_hash.hexdigest())
+                print("fuck")
+                # execute the SQL command
+                cursor.execute(sql, to_sql)
+
+                # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default. Must commit.
+                connection.commit()
+                return 1
+
+            else:
+                return 0
             
     finally:
         connection.close()
-        return 1
-        print(new_user)
-        print(new_pass)
 
 
 def user_login(user, password):
