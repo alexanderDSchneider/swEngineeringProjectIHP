@@ -6,14 +6,17 @@ import pymysql.cursors
 #Connect to the database and salt and hash passwords
 
 def send_to_db(e, u):
-
+    
     new_user = e
     new_pass = u
+
+    #for salting and hashing passwords 
     salt = uuid.uuid4()
     salt = str(salt)
     to_encode = new_pass + salt
     user_hash = hashlib.sha256(to_encode.encode())
 
+    #connect to db
     connection = pymysql.connect(host='mrbartucz.com',
                                  user='eb1391ck',
                                  password='putty1562',
@@ -24,34 +27,42 @@ def send_to_db(e, u):
     try:
         with connection.cursor() as cursor:
 
-            #find if the username is already taken
-            sql = "SELECT * FROM user_data WHERE user_name = %s"
-            to_sql = new_user
-            print(new_user)
-
-            cursor.execute(sql, to_sql)
-
-            fetched_user = " "
+            #reserved word for comparisons
+            if new_user != 'default':
                 
-            for row in cursor:
-                fetched_user = row['user_name']
-
-                
-
-            if(new_user != fetched_user):
-                          
-                sql = "INSERT INTO user_data(user_name, salt, hash) VALUES (%s, %s, %s) "
-                to_sql = (new_user, salt, user_hash.hexdigest())
-                print("fuck")
-                # execute the SQL command
+                #find if the username is already taken
+                sql = "SELECT * FROM user_data WHERE user_name = %s"
+                to_sql = new_user
+            
+                #attempt to find new username in db
                 cursor.execute(sql, to_sql)
 
-                # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default. Must commit.
-                connection.commit()
-                return 1
+                #if not found, null string 
+                fetched_user = " "
 
-            else:
-                return 0
+                #fetch username from retrived data    
+                for row in cursor:
+                    fetched_user = row['user_name']
+
+                
+                #if new user is not taken, = to " "
+                if new_user != fetched_user:
+
+                    #insert generated credentials with the username into the database          
+                    sql = "INSERT INTO user_data(user_name, salt, hash) VALUES (%s, %s, %s) "
+                    to_sql = (new_user, salt, user_hash.hexdigest())
+                
+                    # execute the SQL command
+                    cursor.execute(sql, to_sql)
+
+                    # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default. Must commit.
+                    connection.commit()
+                    return 1
+
+                else:
+                    return 0
+
+            return 3:                
             
     finally:
         connection.close()
@@ -61,6 +72,7 @@ def user_login(user, password):
     #user = input('Enter your username: ')
     #password = input('Enter your password:')
 
+    #connect to db
     connection = pymysql.connect(host='mrbartucz.com',
                                  user='eb1391ck',
                                  password='putty1562',
@@ -71,31 +83,37 @@ def user_login(user, password):
     try:
         with connection.cursor() as cursor:
 
-            salt = ''      #if db does not find value for salt or hash, makes it so if to_compare == str(user_hash) is to_compare == 0
+            salt = 'default'      #if db does not find value for salt or hash, makes it so if to_compare == str(user_hash) is to_compare == 0
             user_hash = ''
 
+            #select data from username
             sql = "SELECT * FROM user_data WHERE user_name = %s"
             to_sql = user
 
             cursor.execute(sql, to_sql)
 
+            #fetch data from cursor    
             for row in cursor:
                 salt = row['salt']
                 user_hash = row['hash']
 
+            #for comparing fetched data to entered password
             salt = str(salt)
             to_encode = password + salt
 
+            #rehash for comparison
             result_hash = hashlib.sha256(to_encode.encode())
             to_compare = result_hash.hexdigest()
-            # print(to_compare)
-            # print(user_hash)
+         
             if to_compare == str(user_hash):
-                print('Login Successful')
+                #success
                 return 1
-            else:
-                print('Login Failed')
+            elif salt != 'default':
+                #fail, account exists
                 return 0
+            elif salt == 'default':
+                #fail, account does not exist
+                return 2
 
     finally:
         connection.close()
@@ -108,9 +126,3 @@ def login_press(e, u):
 def create_press(e, u):
     return_code = send_to_db(e, u)
     return return_code    
-#def main():
-    #print_menu()
-
-
-#if __name__ == '__main__':  # for import
-    #main()

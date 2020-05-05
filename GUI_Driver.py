@@ -78,9 +78,14 @@ class Login(tk.Frame):
             if(check == 1):
                 #successfull login
                 controller.show_frame(StartScreen)
+            elif(check == 2):
+                #login fail, no account by that name
+                popupmsg("Login failed, no user by that name.")
+                user_box.delete(0,"end")
+                pass_box.delete(0,"end")
             else:
                 #on fail clear boxes to try again
-                popupmsg("Login Failed Try Again")
+                popupmsg("Login failed incorrect password.")
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
 
@@ -127,9 +132,10 @@ class CreateAccount(tk.Frame):
             if(check == 1):
                 #successfull 
                 controller.show_frame(Login)
+                popupmsg("Login information created.")
             else:
                 #if fails clears box to try again
-                popupmsg("Username already exists, or something else, whatever")
+                popupmsg("Username already exists.")
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
 
