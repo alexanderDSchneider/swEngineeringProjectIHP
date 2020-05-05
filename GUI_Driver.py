@@ -1,3 +1,7 @@
+# Author: Austin Thompson
+# File: GUI_Driver.py
+# Date: 4/23/2020
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
@@ -138,6 +142,15 @@ class Tutorial(tk.Frame):
         label = tk.Label(self, text = "Select Tutorials", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
         
+        Beginner = tk.Button(self, text = "Beginner", command=lambda: controller.show_frame(StartScreen))
+        Beginner.pack()
+        
+        Intermediate = tk.Button(self, text = "Intermediate", command=lambda: controller.show_frame(StartScreen))
+        Intermediate.pack()
+        
+        Hard = tk.Button(self, text = "Hard", command=lambda: controller.show_frame(StartScreen))
+        Hard.pack()
+        
         Tutorial = tk.Button(self, text = "Tutorial 1", command=lambda: controller.show_frame(StartScreen))
         Tutorial.pack()
     
@@ -172,7 +185,7 @@ class Algorithm_Visualizer(tk.Frame):
         array_size.pack(padx = 15)
         entrysize = tk.Entry(algorithm_frame)
         entrysize.focus()
-        entrysize.pack()
+        entrysize.pack(pady=5)
 
         min_value = 20
         max_value = 200
@@ -184,14 +197,14 @@ class Algorithm_Visualizer(tk.Frame):
         speed.pack()
 
         alg_speed = Scale(algorithm_frame, from_= 0.0, to = 3.0, length = 200, digits = 2, resolution = 0.1, orient = HORIZONTAL)
-        alg_speed.place(relx = 0.5, rely = .95, anchor = CENTER)
+        alg_speed.place(relx=0.5, rely=.9, anchor=CENTER)
         
         canvas = Canvas(self, width=600, height=350, bg='snow2')
         create_array = tk.Button(self, text="Create New Array", command=lambda:Generate(chosen_algorithm, entrysize, canvas), bg='orange')
-        create_array.pack()
+        create_array.place(relx=.43, rely=.20)
         
         start_visualizing = tk.Button(self, text="Animate", command = lambda:Animate(chosen_algorithm, canvas, alg_speed, type_algorithm), width = 13)
-        start_visualizing.pack()
+        start_visualizing.place(relx=.43, rely=.24)
         
         Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(StartScreen))
         Home.place(relx = .5, rely = .95, anchor = CENTER)
@@ -245,7 +258,7 @@ def draw(algorithm, canvas, color_list):
         
     # Update each time an item is moved so that the user can see when an item in the array is moved
     root.update()
-    canvas.pack()
+    canvas.place(rely=.30, relx=.15)
      
 def Animate(algorithm, canvas, alg_speed, type_algorithm):
     algorithm.name = type_algorithm.get()

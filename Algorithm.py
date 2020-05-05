@@ -1,3 +1,8 @@
+# Author: Austin Thompson
+# File: Algorithm.py
+# Date: 4/23/2020
+
+
 from abc import ABC, abstractmethod
 import random
 import time
@@ -73,8 +78,6 @@ class Algorithm(AlgorithmInterface):
                     draw(self, canvas, ['green' if x == j or x == j+1 else 'orange' for x in range(len(self.data))] )
                     time.sleep(float(speed.get()))
         draw(self, canvas, ['green' for x in range(len(self.data))])
-        
-        
         
         
     def animate_insertion(self, canvas, draw, speed):
