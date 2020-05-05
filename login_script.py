@@ -30,11 +30,13 @@ def send_to_db(e, u):
             print(new_user)
 
             cursor.execute(sql, to_sql)
+
+            fetched_user = " "
                 
             for row in cursor:
                 fetched_user = row['user_name']
 
-            print(fetched_user)    
+                
 
             if(new_user != fetched_user):
                           
