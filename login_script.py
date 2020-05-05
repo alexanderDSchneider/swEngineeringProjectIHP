@@ -62,7 +62,8 @@ def send_to_db(e, u):
                 else:
                     return 0
 
-            return 3:                
+            else:
+                return 3                
             
     finally:
         connection.close()

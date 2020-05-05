@@ -133,6 +133,10 @@ class CreateAccount(tk.Frame):
                 #successfull 
                 controller.show_frame(Login)
                 popupmsg("Login information created.")
+            elif(check ==3):
+                popupmsg("You cannot have that username.")
+                user_box.delete(0,"end")
+                pass_box.delete(0,"end")
             else:
                 #if fails clears box to try again
                 popupmsg("Username already exists.")
