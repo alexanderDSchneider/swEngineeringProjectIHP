@@ -2,7 +2,8 @@ import tkinter
 import uuid
 import hashlib
 import pymysql.cursors
-
+#Written by Alexander Schneider 5/3/2020
+#Connect to the database and salt and hash passwords
 
 def send_to_db(e, u):
 
