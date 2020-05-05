@@ -27,7 +27,7 @@ class GUI_Driver(tk.Tk):     #inherit from Tkinter
         # this will allow us to create different windows
         self.frames = {}
         
-        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer, CreateAccount):
+        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer, CreateAccount, beginnerTutorial, intermediateTutorial, hardTutorial):
             # screen on start
             frame = F(container, self)
             self.frames[F] = frame
@@ -78,14 +78,9 @@ class Login(tk.Frame):
             if(check == 1):
                 #successfull login
                 controller.show_frame(StartScreen)
-            elif(check == 2):
-                #login fail, no account by that name
-                popupmsg("Login failed, no user by that name.")
-                user_box.delete(0,"end")
-                pass_box.delete(0,"end")
             else:
                 #on fail clear boxes to try again
-                popupmsg("Login failed incorrect password.")
+                popupmsg("Login Failed Try Again")
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
 
@@ -132,10 +127,9 @@ class CreateAccount(tk.Frame):
             if(check == 1):
                 #successfull 
                 controller.show_frame(Login)
-                popupmsg("Login information created.")
             else:
                 #if fails clears box to try again
-                popupmsg("Username already exists.")
+                popupmsg("Username already exists, or something else, whatever")
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
 
@@ -170,18 +164,80 @@ class Tutorial(tk.Frame):
         label = tk.Label(self, text = "Select Tutorials", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
         
-        Beginner = tk.Button(self, text = "Beginner", command=lambda: controller.show_frame(StartScreen))
+        Beginner = tk.Button(self, text = "Beginner", command=lambda: controller.show_frame(beginnerTutorial))
         Beginner.pack()
         
-        Intermediate = tk.Button(self, text = "Intermediate", command=lambda: controller.show_frame(StartScreen))
+        Intermediate = tk.Button(self, text = "Intermediate", command=lambda: controller.show_frame(intermediateTutorial))
         Intermediate.pack()
         
-        Hard = tk.Button(self, text = "Hard", command=lambda: controller.show_frame(StartScreen))
+        Hard = tk.Button(self, text = "Hard", command=lambda: controller.show_frame(hardTutorial))
         Hard.pack()
-        
-        Tutorial = tk.Button(self, text = "Tutorial 1", command=lambda: controller.show_frame(StartScreen))
-        Tutorial.pack()
-    
+
+class beginnerTutorial(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text = "B_Tutorial", font = LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        #Problem Description
+        label = tk.Label(self, text="In Python, write code that prints out 'Hello World'.", font = PROB_FONT)
+        label.pack(pady=10, padx=10)
+
+        #Input Area
+        inputText = tk.Text(self, height=400, width=40)
+        inputText.pack()
+
+        #Submit button (NOT SHOWING)
+        Submit = tk.Button(self, text="Submit", command=lambda: controller.show_frame(Tutorial))
+        Submit.place(relx=.5, rely=2, anchor=CENTER)
+
+        # Back Button
+        Back = tk.Button(self, text="Home", command=lambda: controller.show_frame(Tutorial))
+        Back.place(relx=.5, rely=.95, anchor=CENTER)
+
+class intermediateTutorial(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text = "I_Tutorial", font = LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        # Problem Description
+        label = tk.Label(self, text="In Python, write code that prints out 1-20 in a loop.", font=PROB_FONT)
+        label.pack(pady=10, padx=10)
+
+        # Input Area
+        inputText = tk.Text(self, height=400, width=40)
+        inputText.pack()
+
+        # Submit button (NOT SHOWING)
+        Submit = tk.Button(self, text="Submit", command=lambda: controller.show_frame(Tutorial))
+        Submit.place(relx=.5, rely=2, anchor=CENTER)
+
+        # Back Button
+        Back = tk.Button(self, text="Home", command=lambda: controller.show_frame(Tutorial))
+        Back.place(relx=.5, rely=.95, anchor=CENTER)
+
+class hardTutorial(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text = "H_Tutorial", font = LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        # Problem Description
+        label = tk.Label(self, text="In Python, write code that calculates the area of a triangle.", font=PROB_FONT)
+        label.pack(pady=10, padx=10)
+
+        # Input Area
+        inputText = tk.Text(self, height=400, width=40)
+        inputText.pack()
+
+        # Submit button (NOT SHOWING)
+        Submit = tk.Button(self, text="Submit", command=lambda: controller.show_frame(Tutorial))
+        Submit.place(relx=.5, rely=2, anchor=CENTER)
+
+        # Back Button
+        Back = tk.Button(self, text="Home", command=lambda: controller.show_frame(Tutorial))
+        Back.place(relx=.5, rely=.95, anchor=CENTER)
     
     
     
@@ -305,6 +361,7 @@ def Animate(algorithm, canvas, alg_speed, type_algorithm):
     
     
 LARGE_FONT = ("Times New Roman", 17)
+PROB_FONT = ("Times New Roman", 10)
 root = GUI_Driver()
 root.title("Introduction To Basic Programming Concepts")
 root.geometry("900x700")
