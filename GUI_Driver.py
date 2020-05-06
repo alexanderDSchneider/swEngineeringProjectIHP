@@ -125,6 +125,9 @@ class CreateAccount(tk.Frame):
         create = tk.Button(self, text = "Create", command = lambda: on_create_press())
         create.pack()
 
+        cancel = tk.Button(self, text = "Cancel", command = lambda: controller.show_frame(Login))
+        cancel.pack()
+
         def on_create_press():
             #call function to create account
             check = create_press(user_box.get(), pass_box.get())
