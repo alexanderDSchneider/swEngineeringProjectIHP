@@ -27,7 +27,7 @@ class GUI_Driver(tk.Tk):     #inherit from Tkinter
         # this will allow us to create different windows
         self.frames = {}
         
-        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer, CreateAccount):
+        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer, CreateAccount, Beginner, Intermediate, Hard ):
             # screen on start
             frame = F(container, self)
             self.frames[F] = frame
@@ -128,7 +128,6 @@ class CreateAccount(tk.Frame):
         def on_create_press():
             #call function to create account
             check = create_press(user_box.get(), pass_box.get())
-            print(check)
             if(check == 1):
                 #successfull 
                 controller.show_frame(Login)
@@ -152,9 +151,7 @@ class CreateAccount(tk.Frame):
             B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
             B1.pack()       
                     
-            
-
-
+        
 class StartScreen(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -174,17 +171,59 @@ class Tutorial(tk.Frame):
         label = tk.Label(self, text = "Select Tutorials", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
         
-        Beginner = tk.Button(self, text = "Beginner", command=lambda: controller.show_frame(StartScreen))
-        Beginner.pack()
+        beginner = tk.Button(self, text = "Beginner", command=lambda:controller.show_frame(Beginner))
+        beginner.pack()
         
-        Intermediate = tk.Button(self, text = "Intermediate", command=lambda: controller.show_frame(StartScreen))
-        Intermediate.pack()
+        intermediate = tk.Button(self, text = "Intermediate", command=lambda: controller.show_frame(Intermediate))
+        intermediate.pack()
         
-        Hard = tk.Button(self, text = "Hard", command=lambda: controller.show_frame(StartScreen))
-        Hard.pack()
+        hard = tk.Button(self, text = "Hard", command=lambda: controller.show_frame(Hard))
+        hard.pack()
         
-        Tutorial = tk.Button(self, text = "Tutorial 1", command=lambda: controller.show_frame(StartScreen))
-        Tutorial.pack()
+        Tutorial = tk.Button(self, text = "Home", command=lambda: controller.show_frame(StartScreen))
+        Tutorial.place(relx=.5, rely=.95, anchor=CENTER)
+        
+        
+class Beginner(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text = "Beginner Tutorials", font = LARGE_FONT)
+        label.pack(pady = 10, padx = 10)
+        
+        
+        TextArea = tk.Text(self, bg='snow2')
+        TextArea.place(rely=.30, relx=.18)
+        
+        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
+        Home.place(relx = .5, rely = .95, anchor = CENTER)
+        
+        
+class Intermediate(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text = "Intermediate Tutorials", font = LARGE_FONT)
+        label.pack(pady = 10, padx = 10)
+    
+        
+        TextArea = tk.Text(self, bg='snow2')
+        TextArea.place(rely=.30, relx=.18)
+        
+        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
+        Home.place(relx = .5, rely = .95, anchor = CENTER)
+        
+        
+class Hard(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text = "Hard Tutorials", font = LARGE_FONT)
+        label.pack(pady = 10, padx = 10)
+        
+        
+        TextArea = tk.Text(self, bg='snow2')
+        TextArea.place(rely=.30, relx=.18)
+        
+        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
+        Home.place(relx = .5, rely = .95, anchor = CENTER)
     
     
     
@@ -194,9 +233,6 @@ class Algorithm_Visualizer(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text = "Select Algorithm", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
-        
-       # self.columnconfigure(0, weight=1)
-       # self.columnconfigure(1, weight=1)
         
         
         # Create a "UI" for the user to generate a new array, etc...
