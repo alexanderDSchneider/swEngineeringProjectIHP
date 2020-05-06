@@ -182,9 +182,10 @@ class Tutorial(tk.Frame):
         
         hard = tk.Button(self, text = "Hard", command=lambda: controller.show_frame(Hard))
         hard.pack()
-        
-        Tutorial = tk.Button(self, text = "Home", command=lambda: controller.show_frame(StartScreen))
-        Tutorial.place(relx=.5, rely=.95, anchor=CENTER)
+
+        Home = tk.Button(self, text="Home", command=lambda: controller.show_frame(StartScreen))
+        Home.place(relx=.5, rely=.95, anchor=CENTER)
+
         
         
 class Beginner(tk.Frame):
@@ -192,13 +193,26 @@ class Beginner(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text = "Beginner Tutorials", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
-        
-        
+
+        # Problem Description
+        descript = tk.Label(self, text = "Using Python code, write code that prints out 'Hello World'", font = PROB_FONT)
+        descript.pack(pady = 12, padx = 10)
+
+        #Input Area
         TextArea = tk.Text(self, bg='snow2')
         TextArea.place(rely=.30, relx=.18)
+
+        # Submit Button / sends to textprint method
+        Submit = tk.Button(self, text="Submit", command=lambda: textprint(TextArea))
+        Submit.place(relx=.5, rely=.9, anchor=CENTER)
+        Submit.pack()
+
+        #Solution button
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution.place(relx=.5, rely=.9, anchor=CENTER)
         
-        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
-        Home.place(relx = .5, rely = .95, anchor = CENTER)
+        Back = tk.Button(self, text = "Back", command=lambda: controller.show_frame(Tutorial))
+        Back.place(relx = .5, rely = .95, anchor = CENTER)
         
         
 class Intermediate(tk.Frame):
@@ -206,13 +220,26 @@ class Intermediate(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text = "Intermediate Tutorials", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
-    
-        
+
+        #Problem Description
+        descript = tk.Label(self, text="Using Python code, write code that prints out 1-20 in a loop", font=PROB_FONT)
+        descript.pack(pady=12, padx=10)
+
+        # Input Area
         TextArea = tk.Text(self, bg='snow2')
         TextArea.place(rely=.30, relx=.18)
-        
-        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
-        Home.place(relx = .5, rely = .95, anchor = CENTER)
+
+        # Submit Button / sends to textprint method
+        Submit = tk.Button(self, text="Submit", command=lambda: textprint(TextArea))
+        Submit.place(relx=.5, rely=.9, anchor=CENTER)
+        Submit.pack()
+
+        # Solution button
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution.place(relx=.5, rely=.9, anchor=CENTER)
+
+        Back = tk.Button(self, text="Back", command=lambda: controller.show_frame(Tutorial))
+        Back.place(relx=.5, rely=.95, anchor=CENTER)
         
         
 class Hard(tk.Frame):
@@ -220,17 +247,28 @@ class Hard(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text = "Hard Tutorials", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
-        
-        
+
+        # Problem Description
+        descript = tk.Label(self, text="Using Python code, write code that finds the area of a triangle with height 5 and width 3", font=PROB_FONT)
+        descript.pack(pady=12, padx=10)
+
+        # Input Area
         TextArea = tk.Text(self, bg='snow2')
         TextArea.place(rely=.30, relx=.18)
-        
-        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
-        Home.place(relx = .5, rely = .95, anchor = CENTER)
-    
-    
-    
-    
+
+        # Submit Button / sends to textprint method
+        Submit = tk.Button(self, text="Submit", command=lambda: textprint(TextArea))
+        Submit.place(relx=.5, rely=.9, anchor=CENTER)
+        Submit.pack()
+
+        # Solution button
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution.place(relx=.5, rely=.9, anchor=CENTER)
+
+        Back = tk.Button(self, text="Back", command=lambda: controller.show_frame(Tutorial))
+        Back.place(relx=.5, rely=.95, anchor=CENTER)
+
+
 class Algorithm_Visualizer(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -343,11 +381,16 @@ def Animate(algorithm, canvas, alg_speed, type_algorithm):
     elif algorithm.name == "Quick Sort":
         array = algorithm.data
         algorithm.animate_quick(canvas, draw, alg_speed, 0, len(array)-1)
-    
+
+
+def textprint(TextArea):
+    print(TextArea.get("1.0",END))
+
     
     
     
 LARGE_FONT = ("Times New Roman", 17)
+PROB_FONT = ("Times New Roman", 14)
 root = GUI_Driver()
 root.title("Introduction To Basic Programming Concepts")
 root.geometry("900x700")
