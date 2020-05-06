@@ -49,7 +49,11 @@ def send_to_db(e, u):
                 return 1
 
             else:
+
                 return 0
+
+                return 3                
+
             
     finally:
         connection.close()
