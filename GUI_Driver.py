@@ -27,7 +27,7 @@ class GUI_Driver(tk.Tk):     #inherit from Tkinter
         # this will allow us to create different windows
         self.frames = {}
         
-        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer, CreateAccount, beginnerTutorial, intermediateTutorial, hardTutorial):
+        for F in ( Login, Tutorial, StartScreen, Algorithm_Visualizer, CreateAccount, Beginner, Intermediate, Hard ):
             # screen on start
             frame = F(container, self)
             self.frames[F] = frame
@@ -78,9 +78,14 @@ class Login(tk.Frame):
             if(check == 1):
                 #successfull login
                 controller.show_frame(StartScreen)
+            elif(check == 2):
+                #login fail, no account by that name
+                popupmsg("Login failed, no user by that name.")
+                user_box.delete(0,"end")
+                pass_box.delete(0,"end")
             else:
                 #on fail clear boxes to try again
-                popupmsg("Login Failed Try Again")
+                popupmsg("Login failed incorrect password.")
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
 
@@ -123,13 +128,17 @@ class CreateAccount(tk.Frame):
         def on_create_press():
             #call function to create account
             check = create_press(user_box.get(), pass_box.get())
-            print(check)
             if(check == 1):
                 #successfull 
                 controller.show_frame(Login)
+                popupmsg("Login information created.")
+            elif(check ==3):
+                popupmsg("You cannot have that username.")
+                user_box.delete(0,"end")
+                pass_box.delete(0,"end")
             else:
                 #if fails clears box to try again
-                popupmsg("Username already exists, or something else, whatever")
+                popupmsg("Username already exists.")
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
 
@@ -142,9 +151,7 @@ class CreateAccount(tk.Frame):
             B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
             B1.pack()       
                     
-            
-
-
+        
 class StartScreen(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -164,80 +171,60 @@ class Tutorial(tk.Frame):
         label = tk.Label(self, text = "Select Tutorials", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
         
-        Beginner = tk.Button(self, text = "Beginner", command=lambda: controller.show_frame(beginnerTutorial))
-        Beginner.pack()
+        beginner = tk.Button(self, text = "Beginner", command=lambda:controller.show_frame(Beginner))
+        beginner.pack()
         
-        Intermediate = tk.Button(self, text = "Intermediate", command=lambda: controller.show_frame(intermediateTutorial))
-        Intermediate.pack()
+        intermediate = tk.Button(self, text = "Intermediate", command=lambda: controller.show_frame(Intermediate))
+        intermediate.pack()
         
-        Hard = tk.Button(self, text = "Hard", command=lambda: controller.show_frame(hardTutorial))
-        Hard.pack()
-
-class beginnerTutorial(tk.Frame):
+        hard = tk.Button(self, text = "Hard", command=lambda: controller.show_frame(Hard))
+        hard.pack()
+        
+        Tutorial = tk.Button(self, text = "Home", command=lambda: controller.show_frame(StartScreen))
+        Tutorial.place(relx=.5, rely=.95, anchor=CENTER)
+        
+        
+class Beginner(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text = "B_Tutorial", font = LARGE_FONT)
-        label.pack(pady=10, padx=10)
-
-        #Problem Description
-        label = tk.Label(self, text="In Python, write code that prints out 'Hello World'.", font = PROB_FONT)
-        label.pack(pady=10, padx=10)
-
-        #Input Area
-        inputText = tk.Text(self, height=400, width=40)
-        inputText.pack()
-
-        #Submit button (NOT SHOWING)
-        Submit = tk.Button(self, text="Submit", command=lambda: controller.show_frame(Tutorial))
-        Submit.place(relx=.5, rely=2, anchor=CENTER)
-
-        # Back Button
-        Back = tk.Button(self, text="Home", command=lambda: controller.show_frame(Tutorial))
-        Back.place(relx=.5, rely=.95, anchor=CENTER)
-
-class intermediateTutorial(tk.Frame):
+        label = tk.Label(self, text = "Beginner Tutorials", font = LARGE_FONT)
+        label.pack(pady = 10, padx = 10)
+        
+        
+        TextArea = tk.Text(self, bg='snow2')
+        TextArea.place(rely=.30, relx=.18)
+        
+        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
+        Home.place(relx = .5, rely = .95, anchor = CENTER)
+        
+        
+class Intermediate(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text = "I_Tutorial", font = LARGE_FONT)
-        label.pack(pady=10, padx=10)
-
-        # Problem Description
-        label = tk.Label(self, text="In Python, write code that prints out 1-20 in a loop.", font=PROB_FONT)
-        label.pack(pady=10, padx=10)
-
-        # Input Area
-        inputText = tk.Text(self, height=400, width=40)
-        inputText.pack()
-
-        # Submit button (NOT SHOWING)
-        Submit = tk.Button(self, text="Submit", command=lambda: controller.show_frame(Tutorial))
-        Submit.place(relx=.5, rely=2, anchor=CENTER)
-
-        # Back Button
-        Back = tk.Button(self, text="Home", command=lambda: controller.show_frame(Tutorial))
-        Back.place(relx=.5, rely=.95, anchor=CENTER)
-
-class hardTutorial(tk.Frame):
+        label = tk.Label(self, text = "Intermediate Tutorials", font = LARGE_FONT)
+        label.pack(pady = 10, padx = 10)
+    
+        
+        TextArea = tk.Text(self, bg='snow2')
+        TextArea.place(rely=.30, relx=.18)
+        
+        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
+        Home.place(relx = .5, rely = .95, anchor = CENTER)
+        
+        
+class Hard(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text = "H_Tutorial", font = LARGE_FONT)
-        label.pack(pady=10, padx=10)
-
-        # Problem Description
-        label = tk.Label(self, text="In Python, write code that calculates the area of a triangle.", font=PROB_FONT)
-        label.pack(pady=10, padx=10)
-
-        # Input Area
-        inputText = tk.Text(self, height=400, width=40)
-        inputText.pack()
-
-        # Submit button (NOT SHOWING)
-        Submit = tk.Button(self, text="Submit", command=lambda: controller.show_frame(Tutorial))
-        Submit.place(relx=.5, rely=2, anchor=CENTER)
-
-        # Back Button
-        Back = tk.Button(self, text="Home", command=lambda: controller.show_frame(Tutorial))
-        Back.place(relx=.5, rely=.95, anchor=CENTER)
+        label = tk.Label(self, text = "Hard Tutorials", font = LARGE_FONT)
+        label.pack(pady = 10, padx = 10)
+        
+        
+        TextArea = tk.Text(self, bg='snow2')
+        TextArea.place(rely=.30, relx=.18)
+        
+        Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
+        Home.place(relx = .5, rely = .95, anchor = CENTER)
+    
     
     
     
@@ -246,9 +233,6 @@ class Algorithm_Visualizer(tk.Frame):
         tk.Frame.__init__(self, parent)
         label = tk.Label(self, text = "Select Algorithm", font = LARGE_FONT)
         label.pack(pady = 10, padx = 10)
-        
-       # self.columnconfigure(0, weight=1)
-       # self.columnconfigure(1, weight=1)
         
         
         # Create a "UI" for the user to generate a new array, etc...
@@ -361,7 +345,6 @@ def Animate(algorithm, canvas, alg_speed, type_algorithm):
     
     
 LARGE_FONT = ("Times New Roman", 17)
-PROB_FONT = ("Times New Roman", 10)
 root = GUI_Driver()
 root.title("Introduction To Basic Programming Concepts")
 root.geometry("900x700")
