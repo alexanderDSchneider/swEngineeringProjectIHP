@@ -29,7 +29,6 @@ class Tutorial(TutorialInterface):
         print(correct)
         return
 
-
     def displayAnswer(self):
         #show all tutorial information
         print("")
