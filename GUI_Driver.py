@@ -7,6 +7,7 @@ from tkinter import ttk
 from tkinter import *
 from Algorithm import Algorithm
 from login_script import *
+from tkinter import messagebox
 import random
 import tkinter
 
@@ -208,8 +209,9 @@ class Beginner(tk.Frame):
         Submit.pack()
 
         #Solution button
-        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(bSolution()))
         solution.place(relx=.5, rely=.9, anchor=CENTER)
+        solution.pack()
         
         Back = tk.Button(self, text = "Back", command=lambda: controller.show_frame(Tutorial))
         Back.place(relx = .5, rely = .95, anchor = CENTER)
@@ -222,7 +224,7 @@ class Intermediate(tk.Frame):
         label.pack(pady = 10, padx = 10)
 
         #Problem Description
-        descript = tk.Label(self, text="Using Python code, write code that prints out 1-20 in a loop", font=PROB_FONT)
+        descript = tk.Label(self, text="Using Python code, write code that prints out 1-20 in a for loop", font=PROB_FONT)
         descript.pack(pady=12, padx=10)
 
         # Input Area
@@ -235,8 +237,9 @@ class Intermediate(tk.Frame):
         Submit.pack()
 
         # Solution button
-        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(iSolution()))
         solution.place(relx=.5, rely=.9, anchor=CENTER)
+        solution.pack()
 
         Back = tk.Button(self, text="Back", command=lambda: controller.show_frame(Tutorial))
         Back.place(relx=.5, rely=.95, anchor=CENTER)
@@ -249,7 +252,7 @@ class Hard(tk.Frame):
         label.pack(pady = 10, padx = 10)
 
         # Problem Description
-        descript = tk.Label(self, text="Using Python code, write code that finds the area of a triangle with height 5 and width 3", font=PROB_FONT)
+        descript = tk.Label(self, text="Using Python code, write code that finds the area of a triangle with height 5 and width 3 \n Use h = height w = width and x = 0.5", font=PROB_FONT)
         descript.pack(pady=12, padx=10)
 
         # Input Area
@@ -262,8 +265,9 @@ class Hard(tk.Frame):
         Submit.pack()
 
         # Solution button
-        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(hSolution()))
         solution.place(relx=.5, rely=.9, anchor=CENTER)
+        solution.pack()
 
         Back = tk.Button(self, text="Back", command=lambda: controller.show_frame(Tutorial))
         Back.place(relx=.5, rely=.95, anchor=CENTER)
@@ -385,6 +389,15 @@ def Animate(algorithm, canvas, alg_speed, type_algorithm):
 
 def textprint(TextArea):
     print(TextArea.get("1.0",END))
+
+def bSolution():
+    messagebox.showinfo("Solution", "print('Hello World')")
+
+def iSolution():
+    messagebox.showinfo("Solution", "for x in range(1, 21)\n     print(x)")
+
+def hSolution():
+    messagebox.showinfo("Solution", "h = 5 \nw = 3 \nx = 0.5 \narea = (h * w)/2 \nprint(area)")
 
     
     

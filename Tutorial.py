@@ -10,7 +10,7 @@ class TutorialInterface(ABC):
         pass
 
     @abstractmethod
-    def display(self):
+    def displayAnswer(self):
         pass
 
 class Tutorial(TutorialInterface):
@@ -23,7 +23,7 @@ class Tutorial(TutorialInterface):
     def check_input(self):
         return
 
-    def display(self):
+    def displayAnswer(self):
         #show all tutorial information
         print("")
 
