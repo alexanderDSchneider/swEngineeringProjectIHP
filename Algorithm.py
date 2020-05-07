@@ -141,34 +141,27 @@ class Algorithm(AlgorithmInterface):
         return border
     
     
-    def color_array(self, length, head, tail, border, index, swapping = False):
+    def color_array(self, length, head, tail, partition, index, swapping = False):
         
         # create an empty color array to make displaying algorithm easier
         array = []
         
         for z in range(length):
             if z >= head and z <= tail:
-                array.append('gray')
+                array.append('grey')
             else:
                 array.append('white')
                 
             if z == tail:
                 array[z] = 'blue'
-            elif z == border:
+            elif z == partition:
                 array[z] = 'red'
             elif z == index:
                 array[z] = 'yellow'
             
             if swapping:
-                if z == border or z == index:
+                if z == partition or z == index:
                     array[z] = 'green'
                     
         return array
     
-    
-        
-        
-        
-        
-        
-        
