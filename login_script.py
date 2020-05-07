@@ -85,7 +85,7 @@ def user_login(user, password):
         with connection.cursor() as cursor:
 
             salt = 'default'      #if db does not find value for salt or hash, makes it so if to_compare == str(user_hash) is to_compare == 0
-            user_hash = ''
+            user_hash = 'default'
 
             #select data from username
             sql = "SELECT * FROM user_data WHERE user_name = %s"
@@ -105,10 +105,20 @@ def user_login(user, password):
             #rehash for comparison
             result_hash = hashlib.sha256(to_encode.encode())
             to_compare = result_hash.hexdigest()
+
+            print(user_hash)
+            print(result_hash)
+            
+            print(to_compare)
+            print(user_hash)
+            print(salt)
          
-            if to_compare == str(user_hash):
-                #success
-                return 1
+            if to_compare == user_hash:
+                if salt != 'default':
+                    #success
+                    return 1
+                else:
+                    return 4
             elif salt != 'default':
                 #fail, account exists
                 return 0

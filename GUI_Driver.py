@@ -83,6 +83,7 @@ class Login(tk.Frame):
                 popupmsg("Login failed, no user by that name.")
                 user_box.delete(0,"end")
                 pass_box.delete(0,"end")
+                controller.show_frame(Login)
             else:
                 #on fail clear boxes to try again
                 popupmsg("Login failed incorrect password.")
@@ -210,10 +211,16 @@ class Intermediate(tk.Frame):
         
         TextArea = tk.Text(self, bg='snow2')
         TextArea.place(rely=.30, relx=.18)
+
+      
+
         
         Home = tk.Button(self, text = "Home", command=lambda: controller.show_frame(Tutorial))
         Home.place(relx = .5, rely = .95, anchor = CENTER)
+
+    
         
+            
         
 class Hard(tk.Frame):
     def __init__(self, parent, controller):
