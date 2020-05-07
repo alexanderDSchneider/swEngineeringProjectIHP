@@ -106,12 +106,6 @@ def user_login(user, password):
             result_hash = hashlib.sha256(to_encode.encode())
             to_compare = result_hash.hexdigest()
 
-            print(user_hash)
-            print(result_hash)
-            
-            print(to_compare)
-            print(user_hash)
-            print(salt)
          
             if to_compare == user_hash:
                 if salt != 'default':

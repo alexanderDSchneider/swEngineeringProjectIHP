@@ -75,7 +75,7 @@ class Login(tk.Frame):
             #call function to login, returns one if correct
             #pass username and password to login funcion
             check = login_press(user_box.get(), pass_box.get())
-            print(check)
+            
             if(check == 1):
                 #successfull login
                 controller.show_frame(StartScreen)
