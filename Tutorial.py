@@ -10,7 +10,7 @@ class TutorialInterface(ABC):
         pass
 
     @abstractmethod
-    def display(self):
+    def displayAnswer(self):
         pass
 
 class Tutorial(TutorialInterface):
@@ -21,9 +21,15 @@ class Tutorial(TutorialInterface):
         self.category = category
 
     def check_input(self):
+        correct = None
+        if input("^print('Hello World')"):
+            correct = True
+        else:
+            correct = False
+        print(correct)
         return
 
-    def display(self):
+
+    def displayAnswer(self):
         #show all tutorial information
         print("")
-
