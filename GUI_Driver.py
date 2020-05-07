@@ -205,14 +205,23 @@ class Beginner(tk.Frame):
         TextArea.place(rely=.30, relx=.18)
 
         # Submit Button / sends to textprint method
+<<<<<<< Updated upstream
         Submit = tk.Button(self, text="Submit", command=lambda: checkInput(TextArea))
+=======
+        Submit = tk.Button(self, text="Submit", command=lambda: textprint(TextArea))
+>>>>>>> Stashed changes
         Submit.place(relx=.5, rely=.9, anchor=CENTER)
         Submit.pack()
 
         #Solution button
+<<<<<<< Updated upstream
         solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(bSolution()))
         solution.place(relx=.5, rely=.9, anchor=CENTER)
         solution.pack()
+=======
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution.place(relx=.5, rely=.9, anchor=CENTER)
+>>>>>>> Stashed changes
         
         Back = tk.Button(self, text = "Back", command=lambda: controller.show_frame(Tutorial))
         Back.place(relx = .5, rely = .95, anchor = CENTER)
@@ -225,7 +234,11 @@ class Intermediate(tk.Frame):
         label.pack(pady = 10, padx = 10)
 
         #Problem Description
+<<<<<<< Updated upstream
         descript = tk.Label(self, text="Using Python code, write code that prints out 1-20 in a for loop", font=PROB_FONT)
+=======
+        descript = tk.Label(self, text="Using Python code, write code that prints out 1-20 in a loop", font=PROB_FONT)
+>>>>>>> Stashed changes
         descript.pack(pady=12, padx=10)
 
         # Input Area
@@ -238,9 +251,14 @@ class Intermediate(tk.Frame):
         Submit.pack()
 
         # Solution button
+<<<<<<< Updated upstream
         solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(iSolution()))
         solution.place(relx=.5, rely=.9, anchor=CENTER)
         solution.pack()
+=======
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution.place(relx=.5, rely=.9, anchor=CENTER)
+>>>>>>> Stashed changes
 
         Back = tk.Button(self, text="Back", command=lambda: controller.show_frame(Tutorial))
         Back.place(relx=.5, rely=.95, anchor=CENTER)
@@ -253,7 +271,11 @@ class Hard(tk.Frame):
         label.pack(pady = 10, padx = 10)
 
         # Problem Description
+<<<<<<< Updated upstream
         descript = tk.Label(self, text="Using Python code, write code that finds the area of a triangle with height 5 and width 3 \n Use h = height and w = width", font=PROB_FONT)
+=======
+        descript = tk.Label(self, text="Using Python code, write code that finds the area of a triangle with height 5 and width 3", font=PROB_FONT)
+>>>>>>> Stashed changes
         descript.pack(pady=12, padx=10)
 
         # Input Area
@@ -266,9 +288,14 @@ class Hard(tk.Frame):
         Submit.pack()
 
         # Solution button
+<<<<<<< Updated upstream
         solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(hSolution()))
         solution.place(relx=.5, rely=.9, anchor=CENTER)
         solution.pack()
+=======
+        solution = tk.Button(self, text="Solution", command=lambda: controller.show_frame(Tutorial))
+        solution.place(relx=.5, rely=.9, anchor=CENTER)
+>>>>>>> Stashed changes
 
         Back = tk.Button(self, text="Back", command=lambda: controller.show_frame(Tutorial))
         Back.place(relx=.5, rely=.95, anchor=CENTER)
@@ -387,13 +414,17 @@ def Animate(algorithm, canvas, alg_speed, type_algorithm):
         array = algorithm.data
         algorithm.animate_quick(canvas, draw, alg_speed, 0, len(array)-1)
 
+<<<<<<< Updated upstream
 def checkInput(TextArea):
     input = TextArea.get("1.0", END)
     Tutorial.check_input(input)
+=======
+>>>>>>> Stashed changes
 
 def textprint(TextArea):
     print(TextArea.get("1.0",END))
 
+<<<<<<< Updated upstream
 def bSolution():
     s = open("bSolution.txt", "r")
     messagebox.showinfo("Solution", s.read())
@@ -406,6 +437,8 @@ def hSolution():
     s = open("hSolution.txt", "r")
     messagebox.showinfo("Solution", s.read())
 
+=======
+>>>>>>> Stashed changes
     
     
     
