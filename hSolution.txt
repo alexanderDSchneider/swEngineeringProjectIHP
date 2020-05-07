@@ -1,0 +1,4 @@
+h = 5
+w = 3
+area = (h*w)/2
+print(area)

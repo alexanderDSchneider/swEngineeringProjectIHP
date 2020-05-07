@@ -8,6 +8,7 @@ from tkinter import *
 from Algorithm import Algorithm
 from login_script import *
 from tkinter import messagebox
+from Tutorial import Tutorial
 import random
 import tkinter
 
@@ -204,7 +205,7 @@ class Beginner(tk.Frame):
         TextArea.place(rely=.30, relx=.18)
 
         # Submit Button / sends to textprint method
-        Submit = tk.Button(self, text="Submit", command=lambda: textprint(TextArea))
+        Submit = tk.Button(self, text="Submit", command=lambda: checkInput(TextArea))
         Submit.place(relx=.5, rely=.9, anchor=CENTER)
         Submit.pack()
 
@@ -252,7 +253,7 @@ class Hard(tk.Frame):
         label.pack(pady = 10, padx = 10)
 
         # Problem Description
-        descript = tk.Label(self, text="Using Python code, write code that finds the area of a triangle with height 5 and width 3 \n Use h = height w = width and x = 0.5", font=PROB_FONT)
+        descript = tk.Label(self, text="Using Python code, write code that finds the area of a triangle with height 5 and width 3 \n Use h = height and w = width", font=PROB_FONT)
         descript.pack(pady=12, padx=10)
 
         # Input Area
@@ -386,18 +387,24 @@ def Animate(algorithm, canvas, alg_speed, type_algorithm):
         array = algorithm.data
         algorithm.animate_quick(canvas, draw, alg_speed, 0, len(array)-1)
 
+def checkInput(TextArea):
+    input = TextArea.get("1.0", END)
+    Tutorial.check_input(input)
 
 def textprint(TextArea):
     print(TextArea.get("1.0",END))
 
 def bSolution():
-    messagebox.showinfo("Solution", "print('Hello World')")
+    s = open("bSolution.txt", "r")
+    messagebox.showinfo("Solution", s.read())
 
 def iSolution():
-    messagebox.showinfo("Solution", "for x in range(1, 21)\n     print(x)")
+    s = open("iSolution.txt", "r")
+    messagebox.showinfo("Solution", s.read())
 
 def hSolution():
-    messagebox.showinfo("Solution", "h = 5 \nw = 3 \nx = 0.5 \narea = (h * w)/2 \nprint(area)")
+    s = open("hSolution.txt", "r")
+    messagebox.showinfo("Solution", s.read())
 
     
     
