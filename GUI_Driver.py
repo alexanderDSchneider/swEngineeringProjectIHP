@@ -398,16 +398,16 @@ def checkInput(TextArea):
     solH = h.read()
 
     if (input == solB):
-        print("Correct!")
+        messagebox.showinfo("Check Answer", "Correct!")
 
     elif (input == solI):
-        print("Correct!")
+        messagebox.showinfo("Check Answer", "Correct!")
 
     elif (input == solH):
-        print("Correct!")
+        messagebox.showinfo("Check Answer", "Correct!")
 
     else:
-        print("Incorrect!")
+        messagebox.showinfo("Check Answer", "Incorrect!")
 
 def textprint(TextArea):
     print(TextArea.get("1.0",END))
